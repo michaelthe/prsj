@@ -1,0 +1,65 @@
+version: "2"
+services:
+  plex:
+    image: plexinc/pms-docker
+    network_mode: host
+    container_name: plex
+    environment:
+      - TZ=Europe/Athens
+      - PLEX_UID=1000
+      - PLEX_GID=1000
+    volumes:
+      - ${CONFIG_DIR}/plex:/config
+      - ${PLEX_MEDIA}/movies:/data/movies
+      - ${PLEX_MEDIA}/series:/data/series
+      - ${PLEX_TRANSCODE}:/tmp
+
+  radarr:
+    image: linuxserver/radarr
+    network_mode: host
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Athens
+    volumes:
+      - ${CONFIG_DIR}/radarr:/config
+      - ${PLEX_MEDIA}/movies:/movies
+      - ${DOWNLOADS_DIR}:/downloads
+
+  sonarr:
+    image: linuxserver/sonarr
+    network_mode: host
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Athens
+    volumes:
+      - ${CONFIG_DIR}/sonarr:/config
+      - ${PLEX_MEDIA}/series:/tv
+      - ${DOWNLOADS_DIR}:/downloads
+
+  jackett:
+    image: linuxserver/jackett
+    network_mode: host
+    container_name: jackett
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Athens
+    volumes:
+      - ${CONFIG_DIR}/jackett:/config
+      - ${DOWNLOADS_DIR}:/downloads
+
+  transmission:
+    image: linuxserver/transmission
+    network_mode: host
+    container_name: transmission
+    environment:
+      - TZ=Europe/Athens
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ${CONFIG_DIR}/transmission:/config
+      - ${DOWNLOADS_DIR}:/downloads
