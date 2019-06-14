@@ -3,4 +3,4 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 docker-compose --file ${DIR}/docker-compose.yml stop
-sleep 3
+sleep 5

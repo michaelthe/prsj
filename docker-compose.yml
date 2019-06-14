@@ -63,3 +63,15 @@ services:
     volumes:
       - ${CONFIG_DIR}/transmission:/config
       - ${DOWNLOADS_DIR}:/downloads
+#  deluge:
+#    image: linuxserver/deluge
+#    network_mode: host
+#    container_name: deluge
+#    environment:
+#      - TZ=Europe/Athens
+#      - PUID=1000
+#      - PGID=1000
+#      - UMASK_SET=022
+#    volumes:
+#      - ${CONFIG_DIR}/deluge:/config
+#      - ${DOWNLOADS_DIR}:/downloads
