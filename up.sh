@@ -6,8 +6,6 @@ source ${DIR}/.env
 
 ${DIR}/fix-permissions.sh
 
-${DIR}/stop.sh
-
 docker-compose --file ${DIR}/docker-compose.yml pull
 sleep 5
 
